@@ -1,0 +1,11 @@
+[Unit]
+Description=Camera motion detection service.
+After=multi-user.target
+
+[Service]
+Environment=MOTION_CAMERA_OUTPUT_DIR=/home/pi/Pictures/motion_camera
+Type=idle
+ExecStart=/usr/bin/python3 /usr/local/bin/motion_camera/motion_camera.py > /var/log/motion_camera/current.txt 2>&1
+
+[Install]
+WantedBy=multi-user.target

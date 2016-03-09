@@ -1,0 +1,11 @@
+[Unit]
+Description=MongoDb
+After=multi-user.target
+
+[Service]
+Restart=always
+EnvironmentFile=/etc/sysconfig/mongod
+ExecStart=/usr/bin/mongod $OPTIONS run
+
+[Install]
+WantedBy=multi-user.target

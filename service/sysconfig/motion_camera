@@ -1,0 +1,1 @@
+OPTIONS="--server http://localhost:8000/api/events --camera_name "Pi Camera 1" --location "Ben Lomond" --output_dir=/opt/camera_server/public/images"

@@ -3,13 +3,13 @@ Description=Camera image server.
 After=multi-user.target mongodb.service
 
 [Service]
-ExecStart=node /opt/camera_server/bin/www
+ExecStart=/usr/bin/node /opt/camera_server/bin/www
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=camera_server
-User=pi_camera
-Group=pi_camera
+User=picam
+Group=picam
 Environment=NODE_ENV=production
 
 [Install]

@@ -6,6 +6,8 @@ After=multi-user.target
 Restart=always
 EnvironmentFile=/etc/sysconfig/mongod
 ExecStart=/usr/bin/mongod $OPTIONS run
+User=picam
+Group=picam
 
 [Install]
 WantedBy=multi-user.target

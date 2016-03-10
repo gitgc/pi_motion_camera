@@ -44,10 +44,10 @@ def capturePiImage():
 
     image = {}
     image['name'] = fileName
-    image['path'] = filePath
+    image['path'] = '/images/' + fileName
     image['date'] = datetime.now().isoformat()
 
-    camera.capture(getFilePath())
+    camera.capture(filePath)
     imageList.append(image)
 
 def motionDetected():

@@ -7,8 +7,6 @@ Restart=always
 Type=idle
 EnvironmentFile=/etc/sysconfig/motion_camera
 ExecStart=/usr/bin/python3 /usr/local/bin/motion_camera/motion_camera.py $OPTIONS > /var/log/motion_camera/current.txt 2>&1
-User=pi_camera
-Group=pi_camera
 
 [Install]
 WantedBy=multi-user.target

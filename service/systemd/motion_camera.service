@@ -5,8 +5,7 @@ After=multi-user.target camera_server.service
 [Service]
 Restart=always
 Type=idle
-EnvironmentFile=/etc/sysconfig/motion_camera
-ExecStart=/usr/bin/python3 /usr/local/bin/motion_camera/motion_camera.py $OPTIONS > /var/log/motion_camera/current.txt 2>&1
+ExecStart=/usr/bin/python3 /opt/motion_camera/motion_camera.py --server http://localhost:8000/api/events --camera_name PiCamera1 --location BenLomond --output_dir /opt/camera_server/public/images
 
 [Install]
 WantedBy=multi-user.target

@@ -6,6 +6,7 @@ import picamera
 import argparse
 import json
 import urllib.request
+import RPi.GPIO as GPIO
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--server')
@@ -22,10 +23,18 @@ location = args.location
 print("Writing images to " + output_dir)
 print("Posting data to " + eventPostUrl)
 
+# IR Lamp MOSFET Setup
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT)
+
+# Motion Sensor Setup
 pir = MotionSensor(4)
+
+# Camera Setup
 camera = picamera.PiCamera()
 camera.resolution = camera.MAX_RESOLUTION
 camera.led = False
+
 motionActive = False
 imageList = []
 
@@ -53,11 +62,15 @@ def capturePiImage():
 def motionDetected():
     global motionActive
     motionActive = True
+    # Switch on lamp
+    GPIO.output(17,GPIO.HIGH)
 
 def noMotionDetected():
     global motionActive
     global imageList
     motionActive = False
+    # Switch off lamp
+    GPIO.output(17,GPIO.LOW)
     postImages(imageList)
     imageList = []
 

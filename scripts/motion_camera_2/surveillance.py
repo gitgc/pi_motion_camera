@@ -41,7 +41,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
     motionDetected = False
 
     # resize the frame, convert it to grayscale, and blur it
-    frame = imutils.resize(frame, width=500)
+    frame = imutils.resize(frame, width=conf["opencv_image_width"])
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
@@ -80,20 +80,23 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
     #Check to see if motion
     if motionDetected:
         # check to see if enough time has passed between uploads
-        if (timestamp - lastUploaded).seconds >= conf["min_upload_seconds"]:
-            # increment the motion counter
-            motionCounter += 1
+        #if (timestamp - lastUploaded).seconds >= conf["min_upload_seconds"]:
 
-            # check to see if the number of frames with consistent motion is
-            # high enough
-            if motionCounter >= conf["min_motion_frames"]:
-                t = TempImage()
-                cv2.imwrite(t.path, frame)
+        # increment the motion counter
+        motionCounter += 1
 
-                # update the last uploaded timestamp and reset the motion
-                # counter
-                lastUploaded = timestamp
-                motionCounter = 0
+        print("Motion Counter:" + str(motionCounter))
+
+        # check to see if the number of frames with consistent motion is
+        # high enough
+        if motionCounter >= conf["min_motion_frames"]:
+            t = TempImage()
+            cv2.imwrite(t.path, frame)
+
+            # update the last uploaded timestamp and reset the motion
+            # counter
+            lastUploaded = timestamp
+            motionCounter = 0
 
     else:
         motionCounter = 0

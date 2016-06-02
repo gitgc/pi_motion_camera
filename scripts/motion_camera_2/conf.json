@@ -1,9 +1,10 @@
 {
 	"min_upload_seconds": 3.0,
-	"min_motion_frames": 8,
+	"min_motion_frames": 4,
 	"camera_warmup_time": 2.5,
 	"delta_thresh": 5,
 	"resolution": [640, 480],
+	"opencv_image_width":500,
 	"fps": 16,
 	"min_area": 5000
 }

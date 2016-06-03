@@ -31,8 +31,8 @@ while True:
 	# grab the frame from the threaded video stream and resize it
     # resize the frame, convert it to grayscale, and blur it
     frame = vs.read()
-    frame = imutils.resize(frame, width=conf["opencv_image_width"])
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    analysisFrame = imutils.resize(frame, width=conf["opencv_image_width"])
+    gray = cv2.cvtColor(analysisFrame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
     # if the average frame is None, initialize it
@@ -62,9 +62,9 @@ while True:
 
 	# draw the timestamp on the frame
     timestamp = datetime.datetime.now()
-    ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
-    cv2.putText(frame, ts, (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                0.35, (0, 0, 255), 1)  # Check to see if motion
+    #ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
+    #cv2.putText(frame, ts, (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX,
+    #           0.35, (0, 0, 255), 1)  # Check to see if motion
 
     if motionDetected:
         # check to see if enough time has passed between uploads
